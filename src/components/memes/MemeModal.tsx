@@ -101,16 +101,25 @@ const MemeModal = ({ isOpen, onClose, meme }: MemeModalProps) => {
 							label="Title"
 							value={formData.title || ''}
 							color={errors.title ? 'danger' : 'default'}
-							errorMessage={errors.title}
 							onChange={(e) => handleChange('title', e.target.value)}
 						/>
+						{!formData.imageUrl && (
+							<span className="text-gray-500 text-sm">
+								Please enter title, minimum 3 letters
+							</span>
+						)}
 						<Input
 							label="Image URL"
 							value={formData.imageUrl || ''}
 							color={errors.imageUrl ? 'danger' : 'default'}
-							errorMessage={errors.imageUrl}
 							onChange={(e) => handleChange('imageUrl', e.target.value)}
 						/>
+						{!formData.imageUrl && (
+							<span className="text-gray-500 text-sm">
+								Please provide a valid image URL. URL must end with .jpg, .jpeg,
+								.webp, or .avif
+							</span>
+						)}
 						<Dropdown>
 							<DropdownTrigger>
 								<Button variant="bordered">
