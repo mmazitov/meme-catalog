@@ -54,6 +54,10 @@ const MemeModal = ({ isOpen, onClose, meme }: MemeModalProps) => {
 
 	const handleChange = (field: keyof Meme, value: string | number) => {
 		setFormData((prev) => ({ ...prev, [field]: value }));
+		if (!value || String(value).trim() === '') {
+			setErrors((prev) => ({ ...prev, [field]: 'This field cannot be empty' }));
+			return;
+		}
 		const { error } = validateField(field, value);
 		setErrors((prev) => ({ ...prev, [field]: error || '' }));
 	};
@@ -92,7 +96,7 @@ const MemeModal = ({ isOpen, onClose, meme }: MemeModalProps) => {
 			<ModalContent>
 				<ModalHeader>Edit Meme</ModalHeader>
 				<ModalBody>
-					<div className="flflex flex-col gap-4
+					<div className="flex flex-col gap-4">
 						<Input
 							label="Title"
 							value={formData.title || ''}
@@ -130,7 +134,7 @@ const MemeModal = ({ isOpen, onClose, meme }: MemeModalProps) => {
 							</DropdownMenu>
 						</Dropdown>
 						{errors.likes && (
-							<p className="tetext-sm text-danger{errors.likes}</p>
+							<p className="text-danger text-sm">{errors.likes}</p>
 						)}
 					</div>
 				</ModalBody>
