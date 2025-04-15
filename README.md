@@ -1,54 +1,131 @@
-# React + TypeScript + Vite
+# Meme Catalog
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React application for browsing and managing meme collections. Features both table and grid views, with the ability to edit meme details and copy image URLs. Built with React, TypeScript, and modern tooling.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **[React:](https://react.dev/)** A JavaScript library for building user interfaces
+- **[Redux Toolkit:](https://redux-toolkit.js.org/)** State management with built-in best practices
+- **[TypeScript:](https://www.typescriptlang.org/)** Static typing for enhanced development experience
+- **[Redux Persist:](https://www.npmjs.com/package/redux-persist)** Persistence layer for Redux state
+- **[Tailwind CSS:](https://tailwindcss.com/)** Utility-first CSS framework
+- **[Hero UI:](https://heroui.dev/)** Modern UI component library
+- **[React Masonry CSS:](https://www.npmjs.com/package/react-masonry-css)** Responsive grid layout library
+- **[Zod:](https://zod.dev/)** TypeScript-first schema validation
+- **[ESLint:](https://eslint.org/)** & **[Prettier:](https://prettier.io/)** Code quality and formatting
+- **[Vite:](https://vite.dev/)** Next generation frontend tooling
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Dual View Modes**: Switch between table and masonry grid layouts
+- **Meme Management**: Edit meme titles, URLs, and like counts
+- **Clipboard Integration**: Quick copy functionality for meme URLs
+- **Form Validation**: Schema-based validation using Zod
+- **Responsive Design**: Mobile-friendly with adaptive navigation
+- **State Persistence**: Automatically saves state to localStorage
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Views
+
+### Table View
+- Organized display of meme information in a structured format
+- Quick access to edit functionality
+- Sortable columns for better organization
+
+### Masonry Grid View
+- Pinterest-style responsive grid layout
+- Automatically adjusts columns based on screen size:
+  - 4 columns for large screens (default)
+  - 3 columns at 1100px breakpoint
+  - 2 columns at 700px breakpoint
+  - 1 column at 500px breakpoint
+- Optimized image display with proper spacing
+- Copy URL functionality with visual feedback
+- Like counter overlay on images
+
+## Getting Started
+
+Before starting 🏁, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+
+```bash
+# Before starting 🏁, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.  
+
+# Clone this project
+$ git clone https://github.com/mmazitov/meme-catalog
+
+# Access
+$ cd meme-catalog
+
+# Install dependencies
+$ npm install
+# or
+$ yarn install
+
+# Start development server
+$ npm run dev
+# or
+$ yarn dev
+
+# Build for production
+$ npm run build
+# or
+$ yarn build
+
+# Preview production build
+$ npm run preview
+# or
+$ yarn preview
+
+# Run linting
+$ npm run lint
+# or
+$ yarn lint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+<code>Components</code>
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+- `MemeCard`: Grid view component for individual memes
+- `MemeModal`: Edit modal for meme details
+- `TablePage`: Table view for meme listing
+- `ListPage`: Masonry grid view for memes
+
+<code>Hooks</code>
+
+- `useClipboard`: Manages clipboard operations
+- `useModal`: Generic modal state management
+- `useNavigationLinks`: Navigation link management
+
+<code>Features</code>
+
+- `Redux State`: Centralized state management with persistence
+- `Form Validation`: Schema-based validation for meme data
+- `Responsive Layout`: Adaptive design for all screen sizes
+
+<code>Folder Structure</code>
+
 ```
+src/
+├── components/    # Reusable UI components
+├── hooks/         # Custom React hooks
+├── lib/          # Core functionality
+│   ├── data/     # Initial data
+│   ├── redux/    # Redux setup and slices
+│   ├── validation/ # Form validation
+│   └── providers/ # React providers
+└── pages/        # Main view components
+```
+
+## Future Enhancements
+
+- Add search and filtering capabilities
+- Implement meme creation functionality
+- Add sorting options for both views
+- Implement image upload functionality
+- Add user authentication and personal collections
+- Add sharing capabilities
+- Implement infinite scroll for large collections
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.

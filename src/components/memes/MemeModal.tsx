@@ -21,20 +21,25 @@ import {
 	validateMemeData,
 } from '../../lib/validation/memeValidation';
 
+// Props interface for the modal component
 interface MemeModalProps {
-	isOpen: boolean;
-	onClose: () => void;
-	meme: Meme | null;
+	isOpen: boolean; // Controls modal visibility
+	onClose: () => void; // Handler for closing the modal
+	meme: Meme | null; // Meme data to edit
 }
 
+// Modal component for editing meme details
 const MemeModal = ({ isOpen, onClose, meme }: MemeModalProps) => {
 	const dispatch = useDispatch();
+	// Form state management
 	const [formData, setFormData] = useState<Partial<Meme>>({});
 	const [errors, setErrors] = useState<ValidationErrors>({});
+	// Likes selection state
 	const [selectedLikes, setSelectedLikes] = useState<Selection>(
 		new Set([meme?.likes?.toString() || '0']),
 	);
 
+	// Reset form when modal opens
 	useEffect(() => {
 		if (isOpen && meme) {
 			resetForm(meme);
@@ -87,7 +92,7 @@ const MemeModal = ({ isOpen, onClose, meme }: MemeModalProps) => {
 			<ModalContent>
 				<ModalHeader>Edit Meme</ModalHeader>
 				<ModalBody>
-					<div className="flex flex-col gap-4">
+					<div className="flflex flex-col gap-4
 						<Input
 							label="Title"
 							value={formData.title || ''}
@@ -125,7 +130,7 @@ const MemeModal = ({ isOpen, onClose, meme }: MemeModalProps) => {
 							</DropdownMenu>
 						</Dropdown>
 						{errors.likes && (
-							<p className="text-danger text-sm">{errors.likes}</p>
+							<p className="tetext-sm text-danger{errors.likes}</p>
 						)}
 					</div>
 				</ModalBody>

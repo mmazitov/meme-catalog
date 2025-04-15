@@ -2,16 +2,20 @@ import { useEffect } from 'react';
 import Masonry from 'react-masonry-css';
 import { useDispatch, useSelector } from 'react-redux';
 import MemeCard from '../components/memes/MemeCard';
-import { MASONRY_BREAKPOINTS } from '../lib/constants/breakpoints';
 import useClipboard from '../hooks/useClipboard';
+import { MASONRY_BREAKPOINTS } from '../lib/constants/breakpoints';
 import { RootState } from '../lib/redux/rootReducer';
 import { loadMemes } from '../lib/redux/slices/memesSlice';
 
+// Component for displaying memes in a masonry grid layout
 const ListPage = () => {
 	const dispatch = useDispatch();
+	// Get memes from Redux store
 	const { memes } = useSelector((state: RootState) => state.memes);
+	// Clipboard functionality with custom hook
 	const { copiedId, handleCopy } = useClipboard();
 
+	// Load memes on component mount
 	useEffect(() => {
 		dispatch(loadMemes());
 	}, [dispatch]);

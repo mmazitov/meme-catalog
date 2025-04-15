@@ -1,6 +1,7 @@
 import { NavbarBrand } from '@heroui/navbar';
 import { Link } from '@heroui/react';
 
+// Application logo component with brand link
 const Logo = () => {
 	return (
 		<NavbarBrand>

@@ -4,12 +4,14 @@ import { FaRegCopy } from 'react-icons/fa';
 import { IoIosDoneAll } from 'react-icons/io';
 import { Meme } from '../../lib/redux/slices/memesSlice';
 
+// Props interface for MemeCard component
 interface MemeCardProps {
-	meme: Meme;
-	copiedId: string | null;
-	onCopy: (text: string, id: string) => void;
+	meme: Meme; // Meme data to display
+	copiedId: string | null; // ID of currently copied meme URL
+	onCopy: (text: string, id: string) => void; // Copy handler function
 }
 
+// Component for displaying individual meme cards
 const MemeCard = ({ meme, copiedId, onCopy }: MemeCardProps) => {
 	return (
 		<Card>

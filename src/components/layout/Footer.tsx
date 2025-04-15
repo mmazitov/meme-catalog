@@ -1,5 +1,6 @@
 import { Link } from '@heroui/react';
 
+// Footer component with copyright information
 const Footer = () => {
 	return (
 		<footer className="bg-white dark:bg-gray-900 shadow py-4">

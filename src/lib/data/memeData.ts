@@ -1,9 +1,10 @@
+// Initial meme data with popular meme templates
 export const initialMemes = [
 	{
 		id: 1,
 		title: 'Distracted Boyfriend',
 		imageUrl: 'https://i.imgflip.com/1ur9b0.jpg',
-		likes: Math.floor(Math.random() * 99),
+		likes: Math.floor(Math.random() * 99), // Random initial likes
 	},
 	{
 		id: 2,

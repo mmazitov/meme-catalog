@@ -15,11 +15,15 @@ import useModal from '../hooks/useModal';
 import { Meme, loadMemes } from '../lib/redux/slices/memesSlice';
 import { RootState } from '../lib/redux/store';
 
+// Component for displaying memes in a table format
 const TablePage = () => {
 	const dispatch = useDispatch();
+	// Get memes from Redux store
 	const { memes } = useSelector((state: RootState) => state.memes);
+	// Modal handling with custom hook
 	const { isOpen, openModal, closeModal, selectedItem } = useModal<Meme>();
 
+	// Load memes on component mount
 	useEffect(() => {
 		dispatch(loadMemes());
 	}, [dispatch]);

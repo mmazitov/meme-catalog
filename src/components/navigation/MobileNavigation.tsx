@@ -2,6 +2,7 @@ import { NavbarItem, NavbarMenu } from '@heroui/navbar';
 import { Link } from '@heroui/react';
 import useNavigationLinks from '../../hooks/useNavigationLinks';
 
+// Mobile navigation menu, visible only on small screens
 const MobileNavigation = () => {
 	const { links, linkClasses } = useNavigationLinks();
 
