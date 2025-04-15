@@ -1,5 +1,5 @@
 {
-	"name": "react-editor",
+	"name": "meme-catalog",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -8,6 +8,9 @@
 		"build": "tsc -b && vite build",
 		"lint": "eslint .",
 		"preview": "vite preview"
+	},
+	"engines": {
+		"node": ">=20.0.0"
 	},
 	"dependencies": {
 		"@heroui/button": "^2.2.17",
