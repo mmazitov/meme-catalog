@@ -103,7 +103,7 @@ const MemeModal = ({ isOpen, onClose, meme }: MemeModalProps) => {
 							color={errors.title ? 'danger' : 'default'}
 							onChange={(e) => handleChange('title', e.target.value)}
 						/>
-						{!formData.imageUrl && (
+						{!formData.title && (
 							<span className="text-gray-500 text-sm">
 								Please enter title, minimum 3 letters
 							</span>
