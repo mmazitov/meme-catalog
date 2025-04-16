@@ -1,3 +1,4 @@
+import { Spinner } from '@heroui/react';
 import { useEffect } from 'react';
 import Masonry from 'react-masonry-css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,20 +6,34 @@ import MemeCard from '../components/memes/MemeCard';
 import useClipboard from '../hooks/useClipboard';
 import { MASONRY_BREAKPOINTS } from '../lib/constants/breakpoints';
 import { RootState } from '../lib/redux/rootReducer';
-import { loadMemes } from '../lib/redux/slices/memesSlice';
+import { fetchMemesThunk } from '../lib/redux/slices/memesSlice';
 
-// Component for displaying memes in a masonry grid layout
 const ListPage = () => {
 	const dispatch = useDispatch();
-	// Get memes from Redux store
-	const { memes } = useSelector((state: RootState) => state.memes);
-	// Clipboard functionality with custom hook
+	const { memes, loading, error } = useSelector(
+		(state: RootState) => state.memes,
+	);
 	const { copiedId, handleCopy } = useClipboard();
 
-	// Load memes on component mount
 	useEffect(() => {
-		dispatch(loadMemes());
+		dispatch(fetchMemesThunk());
 	}, [dispatch]);
+
+	if (loading) {
+		return (
+			<div className="flex justify-center items-center h-[400px]">
+				<Spinner size="lg" />
+			</div>
+		);
+	}
+
+	if (error) {
+		return (
+			<div className="text-danger text-center">
+				Error loading memes: {error}
+			</div>
+		);
+	}
 
 	return (
 		<Masonry

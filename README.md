@@ -1,6 +1,6 @@
 # Meme Catalog
 
-A modern React application for browsing and managing meme collections. Features both table and grid views, with the ability to edit meme details and copy image URLs. Built with React, TypeScript, and modern tooling.
+A modern React application for browsing and managing meme collections. Features both table and grid views, with the ability to edit meme details and copy image URLs. Built with React, TypeScript, and modern tooling. Uses the Imgflip API for fetching meme content.
 
 ## Tech Stack
 
@@ -17,12 +17,23 @@ A modern React application for browsing and managing meme collections. Features 
 
 ## Features
 
+- **API Integration**: Fetches meme data from the Imgflip API
+- **Random Selection**: Displays 10 random memes from the API
 - **Dual View Modes**: Switch between table and masonry grid layouts
 - **Meme Management**: Edit meme titles, URLs, and like counts
 - **Clipboard Integration**: Quick copy functionality for meme URLs
 - **Form Validation**: Schema-based validation using Zod
 - **Responsive Design**: Mobile-friendly with adaptive navigation
 - **State Persistence**: Automatically saves state to localStorage
+- **Automatic Likes**: Random like count generation for each meme
+
+## API Integration
+
+The application integrates with the [Imgflip API](https://imgflip.com/api) to fetch meme templates. Key features of the API integration include:
+- Fetches a collection of popular meme templates
+- Randomly selects 10 memes for display
+- Automatically generates random like counts (0-99) for each meme
+- Caches fetched memes in Redux store with persistence
 
 ## Views
 

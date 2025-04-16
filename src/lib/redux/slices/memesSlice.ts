@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initialMemes } from '../../data/memeData';
+import { fetchMemes } from '../../api/memesApi';
+import { AppDispatch, RootState } from '../store';
 
-// Interface defining the structure of a meme
 export interface Meme {
 	id: string;
 	title: string;
@@ -9,51 +9,63 @@ export interface Meme {
 	likes: number;
 }
 
-// Interface for the memes state slice
 interface MemesState {
 	memes: Meme[];
+	loading: boolean;
+	error: string | null;
 }
 
-// Initial state with fallback to predefined memes if localStorage is empty
 const initialState: MemesState = {
-	memes:
-		typeof window !== 'undefined'
-			? JSON.parse(localStorage.getItem('memes') || 'null') || initialMemes
-			: initialMemes,
+	memes: [],
+	loading: false,
+	error: null,
 };
 
-// Redux slice for managing memes state
 const memesSlice = createSlice({
 	name: 'memes',
 	initialState,
 	reducers: {
-		// Load memes from localStorage or fallback to initial data
-		loadMemes(state) {
-			state.memes =
-				typeof window !== 'undefined'
-					? JSON.parse(localStorage.getItem('memes') || 'null') || initialMemes
-					: initialMemes;
+		startLoading(state) {
+			state.loading = true;
+			state.error = null;
 		},
-		// Save current memes state to localStorage
-		saveMemes(state) {
-			if (typeof window !== 'undefined') {
-				localStorage.setItem('memes', JSON.stringify(state.memes));
-			}
+		setMemes(state, action: PayloadAction<Meme[]>) {
+			state.memes = action.payload;
+			state.loading = false;
 		},
-		// Update a specific meme and persist changes
+		setError(state, action: PayloadAction<string>) {
+			state.loading = false;
+			state.error = action.payload || 'Failed to fetch memes';
+		},
 		updateMeme(state, action: PayloadAction<Meme>) {
 			const updatedMeme = action.payload;
 			state.memes = state.memes.map((meme) =>
 				meme.id === updatedMeme.id ? updatedMeme : meme,
 			);
-			if (typeof window !== 'undefined') {
-				localStorage.setItem('memes', JSON.stringify(state.memes));
-			}
 		},
 	},
 });
 
-// Export actions and reducer for the memes slice
-export const { loadMemes, saveMemes, updateMeme } = memesSlice.actions;
+export const { startLoading, setMemes, setError, updateMeme } =
+	memesSlice.actions;
+
+export const fetchMemesThunk = () => {
+	return async (dispatch: AppDispatch, getState: () => RootState) => {
+		const state = getState();
+
+		// If we already have memes in store, do nothing
+		if (state.memes.memes.length > 0) {
+			return;
+		}
+
+		try {
+			dispatch(startLoading());
+			const memes = await fetchMemes();
+			dispatch(setMemes(memes));
+		} catch (error: any) {
+			dispatch(setError(error.message));
+		}
+	};
+};
 
 export default memesSlice.reducer;
