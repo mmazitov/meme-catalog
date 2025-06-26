@@ -7,7 +7,7 @@ import TablePage from './pages/TablePage';
 // Main application component with routing setup
 const App = () => {
 	return (
-		<BrowserRouter>
+		<BrowserRouter basename="/">
 			{/* Main layout wrapper */}
 			<div className="flex flex-col bg-gray-50 dark:bg-gray-800 min-h-screen">
 				<Header />
