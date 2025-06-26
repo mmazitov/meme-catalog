@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Header container width limit */
+.header header {
+	max-width: 1536px;
+}
+
+/* Masonry grid spacing */
+.my-masonry-grid_column > div {
+	margin-bottom: 16px;
+}
+
+/* Force full width for meme images */
+.meme-img div:not(.likes) {
+	width: 100%;
+	max-width: none !important;
+}
